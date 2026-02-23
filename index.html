@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>For Shree ❤</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  background: radial-gradient(circle at top left, #ffb6c1, #d98c8c 70%);
+  font-family:'Poppins', sans-serif;
+}
+
+/* Main container */
+.container{
+  position:relative;
+  width:420px;
+  height:260px;
+  border-radius:24px;
+  background:linear-gradient(145deg,#5c3a3a,#402828);
+  box-shadow:0 30px 60px rgba(0,0,0,0.35);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:30px;
+  overflow:hidden;
+}
+
+/* Glow background effect */
+.container::before{
+  content:"";
+  position:absolute;
+  width:500px;
+  height:500px;
+  background:radial-gradient(circle,#ff4d6d55,transparent 60%);
+  top:-200px;
+  left:-200px;
+  pointer-events:none;
+}
+
+/* Message */
+.message{
+  opacity:0;
+  transform:translateY(20px);
+  transition:all 1s ease;
+}
+
+.message h1{
+  font-family:'Playfair Display', serif;
+  color:#fff;
+  font-size:26px;
+  letter-spacing:1px;
+  margin-bottom:10px;
+}
+
+.message p{
+  color:#f8dcdc;
+  font-size:15px;
+  line-height:1.6;
+}
+
+/* Heart button */
+.heart{
+  position:absolute;
+  width:150px;
+  height:150px;
+  background:#ff2e4d;
+  transform:rotate(-45deg);
+  cursor:pointer;
+  transition:all 0.8s ease;
+  box-shadow:0 20px 40px rgba(0,0,0,0.4),
+             0 0 40px rgba(255,0,60,0.4);
+  animation:pulse 2s infinite;
+}
+
+.heart::before,
+.heart::after{
+  content:"";
+  position:absolute;
+  width:150px;
+  height:150px;
+  background:#ff2e4d;
+  border-radius:50%;
+}
+
+.heart::before{
+  top:-75px;
+  left:0;
+}
+
+.heart::after{
+  left:75px;
+  top:0;
+}
+
+/* Pulse animation */
+@keyframes pulse{
+  0%,100%{transform:rotate(-45deg) scale(1);}
+  50%{transform:rotate(-45deg) scale(1.08);}
+}
+
+/* Particle burst */
+.particle{
+  position:absolute;
+  width:8px;
+  height:8px;
+  background:#ff4d6d;
+  border-radius:50%;
+  opacity:0;
+}
+
+/* Open state */
+.container.open .heart{
+  transform:rotate(-45deg) scale(0);
+  opacity:0;
+}
+
+.container.open .message{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* Floating effect after reveal */
+.container.open{
+  animation:float 6s ease-in-out infinite;
+}
+
+@keyframes float{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-12px);}
+}
+
+/* Responsive */
+@media(max-width:480px){
+  .container{
+    transform:scale(0.85);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="card">
+  <div class="heart" onclick="openCard()"></div>
+
+  <div class="message">
+    <h1>Happy Valentine's Day ❤</h1>
+    <p>
+      Every moment with you feels like a beautiful story unfolding.  
+      Today is just a reminder that my heart chose you —  
+      and it would choose you again, every single time.
+    </p>
+  </div>
+</div>
+
+<script>
+function openCard(){
+  const card=document.getElementById("card");
+  card.classList.add("open");
+
+  // Particle burst
+  for(let i=0;i<25;i++){
+    const p=document.createElement("div");
+    p.classList.add("particle");
+    document.body.appendChild(p);
+
+    const x=Math.random()*window.innerWidth;
+    const y=Math.random()*window.innerHeight;
+
+    p.style.left="50%";
+    p.style.top="50%";
+    p.style.opacity=1;
+
+    setTimeout(()=>{
+      p.style.transition="all 1s ease";
+      p.style.left=x+"px";
+      p.style.top=y+"px";
+      p.style.opacity=0;
+    },10);
+
+    setTimeout(()=>p.remove(),1200);
+  }
+}
+</script>
+
+</body>
+</html>
